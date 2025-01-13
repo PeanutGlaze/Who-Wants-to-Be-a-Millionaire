@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define QUESTION_COUNT 15
+#define QUESTION_COUNT 17
 
 //Blueprint for() {} the struct:
 typedef struct qst
@@ -97,29 +97,73 @@ void game()
       {
         if(gameRound != 15)
         {
+          //Continuing the game via a random message consisting of
+          //two randomly chosen sentences
           puts("");
-          puts("This was the correct answer!");
-          puts("Get ready for the next round:");
+          switch((rand() % 6))
+          {
+            case 0:
+              puts("This was the correct answer!");
+              break;
+            case 1:
+              puts("You gave the right answer!");
+              break;
+            case 2:
+              puts("Correct! Did you actually know this?");
+              break;
+            case 3:
+              puts("Right answer!");
+              break;
+            case 4:
+              puts("Perfect!");
+              break;
+            case 5:
+              puts("Splendid!");
+              break;
+          }
+          switch((rand() % 6))
+          {
+            case 0:
+              puts("Get ready for the next round:");
+              break;
+            case 1:
+              puts("Don't lose focus now:");
+              break;
+            case 2:
+              puts("This next one will be tough:");
+              break;
+            case 3:
+              puts("Prepare for the next question:");
+              break;
+            case 4:
+              puts("Make sure to read the question carefully:");
+              break;
+            case 5:
+              puts("Good luck with the next question:");
+              break;
+          }
           puts("");
         }
         else
         {
-          //End of the game:
+          //End of the game
           puts("");
           puts("It seems that you have answered all 15 questions correctly!");
           puts("This means that you won the game and will be walking home with 1 million dollars!");
           puts("Congratulations!");
           puts("We hope to see you face our challenge again.");
           puts("");
+          system("PAUSE");
         }
       }
       else
       {
+        //Ending the game after entering a wrong answer
         puts("");
         puts("Your answer was incorrect!");
         printf("The correct answer was ");
 
-        //Giving out the correct answer:
+        //Giving out the correct answer
         switch(currentQuestion.correctAnswer)
         {
           case 'A':
@@ -147,16 +191,19 @@ void game()
         }
         puts("We are looking forward to seeing you again!");
         puts("");
+        system("PAUSE");
 
         break;
       }
     }
     else
     {
+      //Looping around to the question if the asnwer was invalid
       puts("");
       puts("Your answer is invalid.");
       puts("Please try again:");
       puts("");
+      system("PAUSE");
 
       goto retryAnswer;
     }
@@ -376,6 +423,19 @@ void getQuestion()
         strcpy(currentQuestion.answer3, "1");
         strcpy(currentQuestion.answer4, "11");
         questionWasUsed[15] = true;
+      } else { goto retryQuestion; }
+      break;
+    case 16:
+      if(!questionWasUsed[16])
+      {
+        currentQuestion.correctAnswer = 'D';
+        strcpy(currentQuestion.question,
+          "What is the full name of the female protagonist in Cyberpunk 2077?");
+        strcpy(currentQuestion.answer1, "Vivian");
+        strcpy(currentQuestion.answer2, "Victoria");
+        strcpy(currentQuestion.answer3, "Valentine");
+        strcpy(currentQuestion.answer4, "Valerie");
+        questionWasUsed[16] = true;
       } else { goto retryQuestion; }
       break;
   }
