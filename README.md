@@ -3,6 +3,10 @@
 
  -- Changelog --
 
+ v.1.2 - Changes from Release:
+ + Outsourced the questions into a text file
+ + Several existing features had to be reworked because of that, most prominently the removal of the structs
+
  v.1.1
  + Added randomized sentences for in-between questions
  + Added a pause so the player can still read the text before the game ends
