@@ -1,32 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <time.h>
+#include "header.h"
 
 #define QUESTION_COUNT 17
 
-//Blueprint for() {} the struct:
-typedef struct qst
-{
-  char correctAnswer;
-  char question[100];
-  char answer1[100];
-  char answer2[100];
-  char answer3[100];
-  char answer4[100];
-} qst;
-
-//Making the struct that'll be used throughout the game:
-struct qst currentQuestion;
-
 bool questionWasUsed[QUESTION_COUNT];
-int money = 0;
-int gameRound = 0;
-
-void game();
-void getQuestion();
-void setMoney();
+char correctAnswer;
+char question[5][128];
+int money;
+int gameRound;
 
 int main()
 {
@@ -34,11 +14,11 @@ int main()
 
   char start;
 
-  system("cls");
+  //system("cls");
   puts("Welcome to Who Wants to Be a Millionaire!");
   puts("Are you ready to face 15 devious questions, all related to gaming?");
   puts("");
-  puts("J - Start Game");
+  puts("Y - Start Game");
   puts("N - End Game");
   puts("");
   start = getchar();
@@ -46,7 +26,7 @@ int main()
 
   switch(start)
   {
-    case 'J':
+    case 'Y':
       game();
       break;
     case 'N':
@@ -71,19 +51,14 @@ void game()
   for(gameRound = 1; gameRound < 16; gameRound++)
   {
     setMoney();
-
-    printf("Round: %d", gameRound);
-    printf("\tPrize Money: %d\n\n", money);
-
     getQuestion();
 
     retryAnswer:;
 
-    printf("Question: %s\n", &currentQuestion.question);
-    printf("A: %s\n", &currentQuestion.answer1);
-    printf("B: %s\n", &currentQuestion.answer2);
-    printf("C: %s\n", &currentQuestion.answer3);
-    printf("D: %s\n\n", &currentQuestion.answer4);
+    puts("");
+    printf("Round: %d", gameRound);
+    printf("\tPrize Money: %d\n\n", money);
+    for (int i = 0; i < 5; i++) { printf("%s\n", question[i]); }
 
     while (getchar() != '\n');
     char givenAnswer = getchar();
@@ -93,7 +68,7 @@ void game()
       givenAnswer == 'C' || givenAnswer == 'D')
     {
       //Check if Answer is correct
-      if(givenAnswer == currentQuestion.correctAnswer)
+      if(givenAnswer == correctAnswer)
       {
         if(gameRound != 15)
         {
@@ -164,19 +139,19 @@ void game()
         printf("The correct answer was ");
 
         //Giving out the correct answer
-        switch(currentQuestion.correctAnswer)
+        switch(correctAnswer)
         {
           case 'A':
-            printf("A: %s\n", currentQuestion.answer1);
+            printf("A: %s\n", question[1]);
             break;
           case 'B':
-            printf("B: %s\n", currentQuestion.answer2);
+            printf("B: %s\n", question[2]);
             break;
           case 'C':
-            printf("C: %s\n", currentQuestion.answer3);
+            printf("C: %s\n", question[3]);
             break;
           case 'D':
-            printf("D: %s\n", currentQuestion.answer4);
+            printf("D: %s\n", question[4]);
             break;
         }
 
@@ -220,221 +195,136 @@ void getQuestion()
     case 0:
       if(!questionWasUsed[0])
       {
-        currentQuestion.correctAnswer = 'C';
-        strcpy(currentQuestion.question,
-          "What is the name of Joel's first daughter in The Last of Us");
-        strcpy(currentQuestion.answer1, "Jessie");
-        strcpy(currentQuestion.answer2, "Ellie");
-        strcpy(currentQuestion.answer3, "Sarah");
-        strcpy(currentQuestion.answer4, "Catherine");
+        correctAnswer = 'C';
+          file_reader("questions.txt", "@QUESTION1");
         questionWasUsed[0] = true;
       } else { goto retryQuestion; }
       break;
     case 1:
       if(!questionWasUsed[1])
       {
-        currentQuestion.correctAnswer = 'B';
-        strcpy(currentQuestion.question,
-          "Which of these four characters from Alien: Isolation turns out to be an Android?");
-        strcpy(currentQuestion.answer1, "Amanda Ripley");
-        strcpy(currentQuestion.answer2, "Christopher Samuels");
-        strcpy(currentQuestion.answer3, "Henry Marlow");
-        strcpy(currentQuestion.answer4, "Axel");
+        correctAnswer = 'B';
+          file_reader("questions.txt", "@QUESTION2");
         questionWasUsed[1] = true;
       } else { goto retryQuestion; }
       break;
     case 2:
       if(!questionWasUsed[2])
       {
-        currentQuestion.correctAnswer = 'C';
-        strcpy(currentQuestion.question,
-          "How many coins do you need to buy a hammer in Kingdom: Two Crowns?");
-        strcpy(currentQuestion.answer1, "1");
-        strcpy(currentQuestion.answer2, "2");
-        strcpy(currentQuestion.answer3, "3");
-        strcpy(currentQuestion.answer4, "4");
+        correctAnswer = 'C';
+          file_reader("questions.txt", "@QUESTION3");
         questionWasUsed[2] = true;
       } else { goto retryQuestion; }
       break;
     case 3:
       if(!questionWasUsed[3])
       {
-        currentQuestion.correctAnswer = 'A';
-        strcpy(currentQuestion.question,
-          "In World of Tanks, how many tech tree tanks are based on the chassis of the Pz. IV?");
-        strcpy(currentQuestion.answer1, "3");
-        strcpy(currentQuestion.answer2, "6");
-        strcpy(currentQuestion.answer3, "8");
-        strcpy(currentQuestion.answer4, "7");
+        correctAnswer = 'A';
+          file_reader("questions.txt", "@QUESTION4");
         questionWasUsed[3] = true;
       } else { goto retryQuestion; }
       break;
     case 4:
       if(!questionWasUsed[4])
       {
-        currentQuestion.correctAnswer = 'B';
-        strcpy(currentQuestion.question,
-          "In The Binding of Isaac, how many completion marks are there, including DLC?");
-        strcpy(currentQuestion.answer1, "14");
-        strcpy(currentQuestion.answer2, "12");
-        strcpy(currentQuestion.answer3, "13");
-        strcpy(currentQuestion.answer4, "11");
+        correctAnswer = 'B';
+          file_reader("questions.txt", "@QUESTION5");
         questionWasUsed[4] = true;
       } else { goto retryQuestion; }
       break;
     case 5:
       if(!questionWasUsed[5])
       {
-        currentQuestion.correctAnswer = 'D';
-        strcpy(currentQuestion.question,
-          "How many killer perks in Dead by Daylight affect pick up speed?");
-        strcpy(currentQuestion.answer1, "5");
-        strcpy(currentQuestion.answer2, "12");
-        strcpy(currentQuestion.answer3, "0");
-        strcpy(currentQuestion.answer4, "1");
+        correctAnswer = 'D';
+          file_reader("questions.txt", "@QUESTION6");
         questionWasUsed[5] = true;
       } else { goto retryQuestion; }
       break;
     case 6:
       if(!questionWasUsed[6])
       {
-        currentQuestion.correctAnswer = 'D';
-        strcpy(currentQuestion.question,
-          "How many axes can you collect in The Forest?");
-        strcpy(currentQuestion.answer1, "3");
-        strcpy(currentQuestion.answer2, "6");
-        strcpy(currentQuestion.answer3, "4");
-        strcpy(currentQuestion.answer4, "5");
+        correctAnswer = 'D';
+          file_reader("questions.txt", "@QUESTION7");
         questionWasUsed[6] = true;
       } else { goto retryQuestion; }
       break;
     case 7:
       if(!questionWasUsed[7])
       {
-        currentQuestion.correctAnswer = 'A';
-        strcpy(currentQuestion.question,
-          "How many unique slimes are there in Slime Rancher?");
-        strcpy(currentQuestion.answer1, "19");
-        strcpy(currentQuestion.answer2, "17");
-        strcpy(currentQuestion.answer3, "23");
-        strcpy(currentQuestion.answer4, "15");
+        correctAnswer = 'A';
+          file_reader("questions.txt", "@QUESTION8");
         questionWasUsed[7] = true;
       } else { goto retryQuestion; }
       break;
     case 8:
       if(!questionWasUsed[8])
       {
-        currentQuestion.correctAnswer = 'B';
-        strcpy(currentQuestion.question,
-          "How many Animatronics are there in Five Nights at Freddy's Ultimate Custom Night?");
-        strcpy(currentQuestion.answer1, "50");
-        strcpy(currentQuestion.answer2, "59");
-        strcpy(currentQuestion.answer3, "58");
-        strcpy(currentQuestion.answer4, "61");
+        correctAnswer = 'B';
+          file_reader("questions.txt", "@QUESTION9");
         questionWasUsed[8] = true;
       } else { goto retryQuestion; }
       break;
     case 9:
       if(!questionWasUsed[9])
       {
-        currentQuestion.correctAnswer = 'C';
-        strcpy(currentQuestion.question,
-          "How many players earned the most common achievement in Hearts of Iron IV?");
-        strcpy(currentQuestion.answer1, "90%");
-        strcpy(currentQuestion.answer2, "50%");
-        strcpy(currentQuestion.answer3, "20%");
-        strcpy(currentQuestion.answer4, "75%");
+        correctAnswer = 'C';
+          file_reader("questions.txt", "@QUESTION10");
         questionWasUsed[9] = true;
       } else { goto retryQuestion; }
       break;
     case 10:
       if(!questionWasUsed[10])
       {
-        currentQuestion.correctAnswer = 'A';
-        strcpy(currentQuestion.question,
-          "How many standalone Ace Attorney games are there, not counting collections?");
-        strcpy(currentQuestion.answer1, "11");
-        strcpy(currentQuestion.answer2, "9");
-        strcpy(currentQuestion.answer3, "10");
-        strcpy(currentQuestion.answer4, "12");
+        correctAnswer = 'A';
+          file_reader("questions.txt", "@QUESTION11");
         questionWasUsed[10] = true;
       } else { goto retryQuestion; }
       break;
     case 11:
       if(!questionWasUsed[11])
       {
-        currentQuestion.correctAnswer = 'D';
-        strcpy(currentQuestion.question,
-          "On which console did Phoenix Wright: Ace Attorney originally release on?");
-        strcpy(currentQuestion.answer1, "Nintendo Wii");
-        strcpy(currentQuestion.answer2, "Nintendo DS");
-        strcpy(currentQuestion.answer3, "PC");
-        strcpy(currentQuestion.answer4, "GameBoy Advanced");
+        correctAnswer = 'D';
+          file_reader("questions.txt", "@QUESTION12");
         questionWasUsed[11] = true;
       } else { goto retryQuestion; }
       break;
     case 12:
       if(!questionWasUsed[12])
       {
-        currentQuestion.correctAnswer = 'B';
-        strcpy(currentQuestion.question,
-          "How many cookies do you need for the first Prestige Level in Cookie Clicker?");
-        strcpy(currentQuestion.answer1, "1 billion");
-        strcpy(currentQuestion.answer2, "1 trillion");
-        strcpy(currentQuestion.answer3, "100 million");
-        strcpy(currentQuestion.answer4, "10 trillion");
+        correctAnswer = 'B';
+          file_reader("questions.txt", "@QUESTION13");
         questionWasUsed[12] = true;
       } else { goto retryQuestion; }
       break;
     case 13:
       if(!questionWasUsed[13])
       {
-        currentQuestion.correctAnswer = 'C';
-        strcpy(currentQuestion.question,
-          "How many unique fighters are there in Super Smash Bros Ultimate?");
-        strcpy(currentQuestion.answer1, "79");
-        strcpy(currentQuestion.answer2, "80");
-        strcpy(currentQuestion.answer3, "89");
-        strcpy(currentQuestion.answer4, "90");
+        correctAnswer = 'C';
+          file_reader("questions.txt", "@QUESTION14");
         questionWasUsed[13] = true;
       } else { goto retryQuestion; }
       break;
     case 14:
       if(!questionWasUsed[14])
       {
-        currentQuestion.correctAnswer = 'B';
-        strcpy(currentQuestion.question,
-          "How many champions did League of Legends have on release?");
-        strcpy(currentQuestion.answer1, "10");
-        strcpy(currentQuestion.answer2, "40");
-        strcpy(currentQuestion.answer3, "30");
-        strcpy(currentQuestion.answer4, "20");
+        correctAnswer = 'B';
+          file_reader("questions.txt", "@QUESTION15");
         questionWasUsed[14] = true;
       } else { goto retryQuestion; }
       break;
     case 15:
       if(!questionWasUsed[15])
       {
-        currentQuestion.correctAnswer = 'C';
-        strcpy(currentQuestion.question,
-          "How many Finnish tanks are there in World of Tanks Blitz?");
-        strcpy(currentQuestion.answer1, "0");
-        strcpy(currentQuestion.answer2, "10");
-        strcpy(currentQuestion.answer3, "1");
-        strcpy(currentQuestion.answer4, "11");
+        correctAnswer = 'C';
+          file_reader("questions.txt", "@QUESTION16");
         questionWasUsed[15] = true;
       } else { goto retryQuestion; }
       break;
     case 16:
       if(!questionWasUsed[16])
       {
-        currentQuestion.correctAnswer = 'D';
-        strcpy(currentQuestion.question,
-          "What is the full name of the female protagonist in Cyberpunk 2077?");
-        strcpy(currentQuestion.answer1, "Vivian");
-        strcpy(currentQuestion.answer2, "Victoria");
-        strcpy(currentQuestion.answer3, "Valentine");
-        strcpy(currentQuestion.answer4, "Valerie");
+        correctAnswer = 'D';
+          file_reader("questions.txt", "@QUESTION17");
         questionWasUsed[16] = true;
       } else { goto retryQuestion; }
       break;

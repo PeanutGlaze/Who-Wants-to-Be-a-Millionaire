@@ -1,0 +1,118 @@
+@QUESTION1
+What is the name of Joel's first daughter in The Last of Us?
+Jessie
+Ellie
+Sarah
+Catherine
+
+@QUESTION2
+Which of these four characters from Alien: Isolation turns out to be an Android?
+Amanda Ripley
+Christopher Samuels
+Henry Marlow
+Axel
+
+@QUESTION3
+How many coins do you need to buy a hammer in Kingdom: Two Crowns?
+1
+2
+3
+4
+
+@QUESTION4
+In World of Tanks, how many tech tree tanks are based on the chassis of the Pz. 4?
+3
+6
+8
+7
+
+@QUESTION5
+In The Binding of Isaac, how many completion marks are there, including DLC?
+14
+12
+13
+11
+
+@QUESTION6
+How many killer perks in Dead by Daylight affect pick up speed?
+5
+12
+0
+1
+
+@QUESTION7
+How many axes can you collect in The Forest?
+3
+6
+4
+5
+
+@QUESTION8
+How many unique slimes are there in Slime Rancher?
+19
+17
+23
+15
+
+@QUESTION9
+How many Animatronics are there in Five Nights at Freddy's Ultimate Custom Night?
+50
+59
+58
+61
+
+@QUESTION10
+How many players earned the most common achievement in Hearts of Iron IV?
+90%
+50%
+20%
+75%
+
+@QUESTION11
+How many standalone Ace Attorney games are there, not counting collections?
+11
+9
+10
+12
+
+@QUESTION12
+On which console did Phoenix Wright: Ace Attorney originally release on?
+Nintendo Wii
+Nintendo DS
+PC
+Gameboy Advanced
+
+@QUESTION13
+How many cookies do you need for the first Prestige level in Cookie Clicker?
+1 billion
+1 trillion
+100 million
+10 trillion
+
+@QUESTION14
+How many unique fighters are there in Super Smash Bros Ultimate?
+79
+80
+89
+90
+
+@QUESTION15
+How many champions did League of Legends have on release?
+10
+40
+30
+20
+
+@QUESTION16
+How many Finnish tanks are there in World of Tanks Blitz?
+0
+10
+1
+11
+
+@QUESTION17
+What is the full name of the female protagonist in Cyberpunk 2077?
+Vivian
+Victoria
+Valentine
+Valerie
